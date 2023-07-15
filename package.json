@@ -1,0 +1,31 @@
+{
+  "name": "vhp-mongo-mart",
+  "version": ".0.1",
+  "description": "Will be the interface to mongoDB through a server",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "server": "node testing/server-test.js",
+    "module": "node testing/module.js",
+    "store": "node server.js",
+    "test": "node testing/testmongoose.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VHP1946/vhp-mongo-mart.git"
+  },
+  "author": "cmv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VHP1946/vhp-mongo-mart/issues"
+  },
+  "homepage": "https://github.com/VHP1946/vhp-mongo-mart#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "vhp-api": "^0.1.197"
+  },
+  "dependencies": {
+    "mongodb": "^5.2.0",
+    "mongoose": "^7.0.5"
+  }
+}

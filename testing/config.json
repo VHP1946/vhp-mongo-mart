@@ -1,0 +1,10 @@
+{
+    "creds":{
+      "user": "christianv",
+      "pswrd": "AMracing5511",
+      "db": "",
+      "cluster": "cluster0"
+    },
+    "schemes":"/models/vhp-schemas.js",
+    "PORT": 8080
+  }
