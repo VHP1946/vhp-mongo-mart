@@ -1,13 +1,16 @@
 const {Core}=require('vhp-api');
+const fs = require("fs");
+const path = require('path');
 let API = new Core({
     auth:{
         user:"VOGCH", 
         pswrd:"vogel123"
     },
-    host:'http://18.191.223.80/',
+    host:'http://localhost:8080/',
     sync:false, 
     dev:{comments:true}
 });
+
 let oldMart = new Core({
   auth:{
       user:"VOGCH", 
@@ -23,7 +26,7 @@ let fpack={
   collect:'Quote350',
   method:'QUERY',
   options:{
-    query:{}
+    query:{id:'RRQ-1683559443637'}
   }
 }
 let rpack={
@@ -51,22 +54,13 @@ let upack={
   }
 }
 let ipack={
-  db:'Company',
-  collect:'Employee',
+  db:'Quotes',
+  collect:'Quote350',
   method:'INSERT',
   options:{
-    docs: {
-      empID: '07',
-      fName: 'Test',
-      lName: 'Guy'
-    }
+    docs:{}
   }
 }
-
-//API.SENDrequest({pack:fpack,route:'STORE'}).then(answer=>{
-//    console.log(answer)
-//});
-
 let quote = {
   collect:'apps',
   db:'mquotes',
@@ -76,6 +70,6 @@ let quote = {
     query:{}
   }
 }
-oldMart.SENDrequest({pack:quote,route:'STORE',request:'MART'}).then(answr=>{
-  console.log(answr.body.result);
+API.SENDrequest({pack:fpack,route:'STORE'}).then(answr=>{
+  console.log(answr);
 });

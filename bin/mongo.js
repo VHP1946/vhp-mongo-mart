@@ -47,7 +47,7 @@ module.exports = class VHPMongoClient{
                         populates = pack.collect.split('_');
                         pack.collect=populates.shift();
                         if(this.schemas[pack.collect]){//check that pack.collect has a schema
-                            dbcursor = this.connection.useDb(pack.db,{useCache:true}).model(pack.collect,this.schemas[pack.collect]);
+                            dbcursor = this.connection.useDb(pack.db,{useCache:false}).model(pack.collect,this.schemas[pack.collect]);
                                 if(pack.options!=undefined){
                                     switch(pack.method!=undefined?pack.method.toUpperCase():''){
                                         case 'QUERY':{console.log('query');return resolve(this.QUERYdocs(dbcursor,pack,populates));break;}
