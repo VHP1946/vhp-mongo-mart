@@ -11,13 +11,11 @@ var empSchema = new Schema({
 	title: {type:String,default:''},
 	type: {type:String,default:''},
 	repTo: {type:String,default:''}, //empID
-	
 	jobDesc: {type:String,default:''},
 	joined: {type:Date,default:null},
 	bday: {type:Date,default:null},
 	skills: {type:String,default:''},
 	interest: {type:String,default:''},
-
 	tasks: Array,
 	goals: Array,
 	picture: {type:String,default:''},
@@ -96,9 +94,16 @@ var userSchema = new Schema({
 	admin: Boolean
 });
 
+var xxxl = new Schema({
+	date:Date,
+	jobname:String,
+	profit:Number,
+	tonnage:Number
+})
 module.exports={
     Employee:empSchema,
     Device:devSchema,
     Account:accSchema,
-	User:userSchema
+	User:userSchema,
+	Xxltest:xxxl
 }

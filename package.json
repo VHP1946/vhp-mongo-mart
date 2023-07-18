@@ -1,12 +1,12 @@
 {
   "name": "vhp-mongo-mart",
-  "version": "0.1.1",
+  "version": "0.1.5",
   "description": "Will be the interface to mongoDB through a server",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
     "request": "node dev/server-test.js",
-    "module": "node testing/module.js",
+    "module": "node dev/module.js",
     "mart": "node server.js",
     "server": "node dev/testmongoose.js"
   },

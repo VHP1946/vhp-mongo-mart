@@ -19,7 +19,7 @@ module.exports = class VHPMongoMart{
       this.mongo = new VHPMongoClient(config.creds,config.schemes);
       this.server.on('request',(req,res)=>{//handle headers =>
         if(req.rawHeaders['Sec-Fetch-Site']!='same-origin'){
-          if(false){//flag to handle cors, change in config file
+          if(true){//flag to handle cors, change in config file
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
             res.setHeader('Access-Control-Max-Age', 2592000); // 30 days
@@ -47,9 +47,7 @@ module.exports = class VHPMongoMart{
           this.mongo.ROUTErequest(vpak.pack,res).then(result=>{
             let stat = JSON.stringify(result);
             if(!result.success){
-              res.setHeader('Content-Length',stat.length);
-              console.log(stat.length);
-              res.write(result);
+              res.write(JSON.stringify(result));
               res.end();
             }
           });

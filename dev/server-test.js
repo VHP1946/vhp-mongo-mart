@@ -7,18 +7,17 @@ let API = new Core({
       user:"VOGCH", 
       pswrd:"vogel123"
   },
-  host:'http://localhost:8080/',
+  host:'http://localhost:8000/',//'http://192.168.0.49:8000/',//'http://18.191.223.80/',//
   sync:false, 
   dev:{comments:false}
 });
 
 let fpack={
-  db:'Quotes',
-  collect:'Quote350',
+  db:'Company',
+  collect:'Xxltest',
   method:'QUERY',
   options:{
     query:{
-      status:'S'
     }
   }
 }
