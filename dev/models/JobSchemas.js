@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 
 const {custcore} = require('./CustomerSchemes.js');
 
-var quoteCore = {
+var jobCore = {
     id: {type:String,default:''},
     name: {type:String,default:''},
     custid: {type:String,default:''},
@@ -14,7 +14,11 @@ var quoteCore = {
     zip: {type:String,default:''},
 
     customer: custcore,
+
     estimator: {type:String,default:''},
+    quoteId: {type:String,default:''},
+
+    costing: {type:Object,default:null},
 
     dept: {type:String,default:''},
     cat: {type:String,default:''},
@@ -24,35 +28,26 @@ var quoteCore = {
 
     opendate: {type:Date,default:Date.now()},
     lastdate: {type:Date,default:Date.now()},
-    subdate: {type:Date,default:null},
+    scheddate:{type:Date,default:null},
     apprdate: {type:Date,default:null},
-    closedate: {type:Date,default:null}
+    closedate: {type:Date,default:null}    
 }
 
 
 /**
  * From here, create any more specific structures needed.
- * These will override the defaults provided in the quoteCore
+ * These will override the defaults provided in the jobCore
  */
 
 
-var quote350 = new Schema({...quoteCore,
-    cat:{type:String,default:'350'},
+var job350 = new Schema({...jobCore,
+    dept:{type:String,default:'350'},
     info:{
-        siteinfo: {type:Object,default:null},
-        systems: Array,
-        key: {type:Object,default:null},
-        tracking: {type:Object,default:null}
-}},{
-	toJSON:{virtuals:true},
-	toObject:{virtuals:true},
+        contracts:Array
+    }
 });
-
-var quote400 = {
-
-}
+var job400 = {}
 
 module.exports={
-    Quote350: quote350,
-    Quote400: quote400
+    Job350: job350
 }

@@ -4,7 +4,6 @@ const http = require('http');
 const VHPMongoClient=require('./bin/mongo');
 module.exports = class VHPMongoMart{
   constructor(config=null){
-    console.log('Config ',config);
     if(!config){
       if(process.env.PORT){
         console.log('env')
@@ -45,10 +44,14 @@ module.exports = class VHPMongoMart{
               cip:req.connection.remoteAddress,
             }
           }
-          this.mongo.ROUTErequest(vpak.pack).then(result=>{
-            console.log(result);
-            res.write(JSON.stringify(result));
-            res.end();
+          this.mongo.ROUTErequest(vpak.pack,res).then(result=>{
+            let stat = JSON.stringify(result);
+            if(!result.success){
+              res.setHeader('Content-Length',stat.length);
+              console.log(stat.length);
+              res.write(result);
+              res.end();
+            }
           });
         });
       });

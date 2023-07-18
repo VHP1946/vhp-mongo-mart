@@ -22,7 +22,7 @@ module.exports = class VHPMongoClient{
         this.admin = null; //hold admin access
 
         this.startup.then(conn=>{
-            console.log('Connected');
+            console.log('Connected to->',creds.cluster);
             this.connection = conn;
             this.admin = this.connection.db.admin();
         }).catch(err=>{console.log(err)})
@@ -36,7 +36,7 @@ module.exports = class VHPMongoClient{
      * @param {{db:String,collect:String,method:String,options:Object}} pack
      * @returns 
      */
-    ROUTErequest(pack){
+    ROUTErequest(pack,res){
         return new Promise((resolve,reject)=>{
             var dbcursor = null; //holds the database to be request from
             var populates = []; //holds an array of items to collect at once
@@ -49,13 +49,21 @@ module.exports = class VHPMongoClient{
                         if(this.schemas[pack.collect]){//check that pack.collect has a schema
                             dbcursor = this.connection.useDb(pack.db,{useCache:false}).model(pack.collect,this.schemas[pack.collect]);
                                 if(pack.options!=undefined){
+                                    let runner = null;
                                     switch(pack.method!=undefined?pack.method.toUpperCase():''){
-                                        case 'QUERY':{console.log('query');return resolve(this.QUERYdocs(dbcursor,pack,populates));break;}
-                                        case 'REMOVE':{console.log('remove');return resolve(this.REMOVEdocs(dbcursor,pack));break;}
-                                        case 'UPDATE':{console.log('update');return resolve(this.UPDATEdocs(dbcursor,pack));break;}
-                                        case 'INSERT':{console.log('insert');return resolve(this.INSERTdocs(dbcursor,pack));break;}
+                                        case 'QUERY':{console.log('query');runner = this.QUERYdocs(dbcursor,pack,populates);break;}
+                                        case 'REMOVE':{console.log('remove');runner = this.REMOVEdocs(dbcursor,pack);break;}
+                                        case 'UPDATE':{console.log('update');runner = this.UPDATEdocs(dbcursor,pack);break;}
+                                        case 'INSERT':{console.log('insert');runner = this.INSERTdocs(dbcursor,pack);break;}
                                     }
-                                    return resolve({success:false,msg:'Could not resolve method',results:null});
+                                    if(runner){
+                                        runner.then(result=>{
+                                            res.write(JSON.stringify(result));
+                                            res.end();
+                                            return resolve({success:true});
+                                        })
+                                    }else{return resolve({success:false,msg:'Could not resolve method',results:null});}
+                                    
                                 }else{return resolve({success:false,msg:'No Options',results:null})}
                         }else{return resolve({success:false,msg:'Not a collection',results:null});}
                     }else{return resolve({success:false,msg:'Not a database',results:null})}
@@ -78,6 +86,7 @@ module.exports = class VHPMongoClient{
         return new Promise((resolve,reject)=>{
             let request = null;
             if(pack.options.query){
+                let timein = null;
                 if(poplist.length>0){//if there are things to populate, loop through and establish the connection
                     for(let x=0,l=poplist.length;x<l;x++){
                         if(this.schemas[pack.collect].virtuals[poplist[x]]){
@@ -85,9 +94,12 @@ module.exports = class VHPMongoClient{
                         }
                     }
                     request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).populate(poplist);
-                }else{request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options);}
+                }else{
+                    timein = Date.now();
+                    request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options);
+                }
                 request.then((res)=>{
-                    console.log(res);
+                    console.log('TIMED ',timein,':',Date.now()-timein,'ms');
                     return resolve({success:true,msg:'Queried',result:res});
                 });
             }else{return resolve({success:false,msg:'No query option',result:null})}
