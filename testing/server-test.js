@@ -6,27 +6,17 @@ let API = new Core({
         user:"VOGCH", 
         pswrd:"vogel123"
     },
-    host:'http://localhost:8080/',
+    host:'http:/localhost:8080/',
     sync:false, 
     dev:{comments:true}
 });
 
-let oldMart = new Core({
-  auth:{
-      user:"VOGCH", 
-      pswrd:"vogel123"
-  },
-  sync:false,
-  dev:{comments:true,https:true}
-
-})
-
 let fpack={
-  db:'Quotes',
+  db:'Replacement',
   collect:'Quote350',
   method:'QUERY',
   options:{
-    query:{id:'RRQ-1683559443637'}
+    query:{}
   }
 }
 let rpack={

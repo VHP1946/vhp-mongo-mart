@@ -15,7 +15,7 @@ module.exports = class VHPMongoClient{
     },schemes={}){
 
         this.schemas = schemes;
-        this.uri = `mongodb+srv://${creds.user}:${creds.pswrd}@${creds.cluster}.0awfqdk.mongodb.net/${creds.db}?retryWrites=true&w=majority`
+        this.uri = `mongodb+srv://${creds.user}:${creds.pswrd}@${creds.cluster}.pk6x0.mongodb.net/${creds.db}?retryWrites=true&w=majority`
         this.startup = mongoose.createConnection(this.uri).asPromise();
       
         this.connection = null; //hold original conneciton
