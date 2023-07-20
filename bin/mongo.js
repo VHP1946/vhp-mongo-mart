@@ -40,6 +40,7 @@ class VHPMongoClient{
      */
     ROUTErequest(pack,res){
         return new Promise((resolve,reject)=>{
+            console.log('in request',pack);
             var dbcursor = null; //holds the database to be request from
             var populates = []; //holds an array of items to collect at once
             if(this.validPack(pack)){
@@ -49,6 +50,7 @@ class VHPMongoClient{
                         populates = pack.collect.split('_');
                         pack.collect=populates.shift();
                         if(this.schemas[pack.collect]){//check that pack.collect has a schema
+                            console.log(pack.collect);
                             dbcursor = this.connection.useDb(pack.db,{useCache:true}).model(pack.collect,this.schemas[pack.collect]);
                             if(pack.options!=undefined){
                                 let qtimein = Date.now();
@@ -71,7 +73,7 @@ class VHPMongoClient{
                         }else{return resolve({success:false,msg:'Not a collection',results:null});}
                     }else{return resolve({success:false,msg:'Not a database',results:null})}
                 }).catch(err=>{return resolve({success:false,msg:'Failed to resolve request',results:null})})
-            }
+            }else{return resolve({success:false,msg:'Bad pack'})}
         });
     }
     validPack(pack=null){
@@ -93,8 +95,8 @@ class VHPMongoClient{
                             this.connection.useDb(pack.db,{useCache:true}).model(this.schemas[pack.collect].virtuals[poplist[x]].options.ref,this.schemas[this.schemas[pack.collect].virtuals[poplist[x]].options.ref]);
                         }
                     }
-                    request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).lean().populate(poplist);
-                }else{request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options);}
+                    request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).populate(poplist);
+                }else{request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).lean();}
                 request.then((res)=>{
                     console.log(res);
                     return resolve({success:true,msg:'Queried',result:res});

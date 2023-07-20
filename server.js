@@ -45,7 +45,7 @@ module.exports = class VHPMongoMart{
             }
           }
           this.mongo.ROUTErequest(vpak.pack,res).then(result=>{
-            let stat = JSON.stringify(result);
+            console.log('END ',result);
             if(!result.success){
               res.write(JSON.stringify(result));
               res.end();

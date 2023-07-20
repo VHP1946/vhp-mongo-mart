@@ -46,11 +46,18 @@ let upack={
   }
 }
 let ipack={
-  db:'Quotes',
-  collect:'Quote350',
+  db:'Company',
+  collect:'Account',
   method:'INSERT',
   options:{
-    docs:null
+    docs:{
+      empID:'134',
+      type:'VHP',
+      user:'VOGCH',
+      pswrd:'vogel123',
+      active:true,
+      admin:true
+    }
   }
 }
 
