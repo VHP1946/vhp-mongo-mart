@@ -93,7 +93,7 @@ class VHPMongoClient{
                             this.connection.useDb(pack.db,{useCache:true}).model(this.schemas[pack.collect].virtuals[poplist[x]].options.ref,this.schemas[this.schemas[pack.collect].virtuals[poplist[x]].options.ref]);
                         }
                     }
-                    request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).populate(poplist);
+                    request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options).lean().populate(poplist);
                 }else{request = dbcursor.find(pack.options.query,pack.options.projection,pack.options.options);}
                 request.then((res)=>{
                     console.log(res);

@@ -2,11 +2,32 @@ MongoDB API
 
 This project will end up replacing our current datamart as the primary data mart. Once finished it will sit after the core and be able to scale horizontally with traffic. Most of the information (Schemes / Models) will be noted on in the Project OneNote.
 
-
+- [Setup](#setup)
 - [Requests](#requests)
 - [Responses](#responses)
 
 
+# Setup
+
+Example of .service file for Ubuntu Ec2 unit
+`
+[Unit]
+Description=vhp-mart
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/node /home/ec2-user/mart/server.js
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=vhp-mart
+EnvironmentFile=/home/ec2-user/mart/app.env
+User=ec2-user
+
+[Install]
+WantedBy=multi-user.target
+`
 # Requests
 
 Request will be made very similar to that of the original mart. Better yet, we are able to remove some of the fields in the pack. Even if an application uses the old pack config, they should not have any problems as the back-end will clean any uneeded properties present in the pack.

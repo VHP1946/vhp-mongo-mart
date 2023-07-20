@@ -1,0 +1,11 @@
+{
+    "creds":{
+      "user": "christianv",
+      "pswrd": "eS0PDSaMyQBbMK8o",
+      "db": "",
+      "cluster": "api",
+      "clusterid":"pk6x0"
+    },
+    "schemes":"/models/vhp-schemes.js",
+    "PORT": 8000
+  }

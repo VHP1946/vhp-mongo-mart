@@ -13,8 +13,8 @@ let API = new Core({
 });
 
 let fpack={
-  db:'Company',
-  collect:'Xxltest',
+  db:'Quotes',
+  collect:'Quote350',
   method:'QUERY',
   options:{
     query:{
