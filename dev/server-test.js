@@ -14,8 +14,8 @@ let API = new Core({
 });
 
 let fpack={
-  db:'Company',
-  collect:'Device',
+  db:'Jobs',
+  collect:'Job350',
   method:'QUERY',
   options:{
     query:{
@@ -47,8 +47,8 @@ let upack={
   }
 }
 let ipack={
-  db:'Company',
-  collect:'Employee',
+  db:'Replacement',
+  collect:'Job350',
   method:'INSERT',
   options:{
     docs:{}
@@ -58,10 +58,12 @@ let ipack={
 let emppath = path.join(__dirname,'./data/empbackup.json');
 let accpath = path.join(__dirname,'./data/accbackup.json')
 let depath = path.join(__dirname,'./data/devbackup.json');
+
 let suppath = path.join(__dirname,'./data/supbackup.json');
+let qupath = path.join(__dirname,'./data/qupathbackup.json');
+let jopath = path.join(__dirname,'./data/jobackup.json');
 
-
-let ppath = require(emppath);//accpath;
+let ppath = require(jopath);//accpath;
 
 //for(let x=0;x<ppath.length;x++){
 //  ppath[x]._id = undefined;
