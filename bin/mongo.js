@@ -111,7 +111,7 @@ class VHPMongoClient{
             if(query!=undefined){
                 dbcursor.deleteMany(pack.options.query).then(result=>{
                     return resolve({success:true,msg:'',result:result})
-                })
+                }).catch(err=>{return resolve({success:false,msg:err,result:null})})
             }else{return resolve({success:false,msg:'bad options',result:null})}
         });
     }
@@ -121,7 +121,7 @@ class VHPMongoClient{
             if(pack.options.docs){
                 dbcursor.insertMany(pack.options.docs).then(result=>{
                     return resolve({success:true,msg:'',result:result})
-                })
+                }).catch(err=>{return resolve({success:false,msg:err,result:null})})
             }else{return resolve({success:false,msg:'bad options',result:null})}
         });
     }
@@ -131,7 +131,7 @@ class VHPMongoClient{
             if(pack.options.query!=undefined&&pack.options.update!=undefined){
                 dbcursor.updateMany(pack.options.query,pack.options.update).then(result=>{
                     return resolve({success:true,msg:'',result:result})
-                })
+                }).catch(err=>{return resolve({success:false,msg:err,result:null})})
             }else{return resolve({success:false,msg:'bad options',result:null})}
         });
     }

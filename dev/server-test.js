@@ -7,14 +7,15 @@ let API = new Core({
       user:"VOGCH", 
       pswrd:"vogel123"
   },
-  host:'http://localhost:8000/',//'http://192.168.0.49:8000/',//'http://18.191.223.80/',//
+  host:'http://localhost:8080/',//'http://18.191.223.80/',//'http://192.168.0.49:8000/',//
   sync:false, 
-  dev:{comments:false}
+  dev:{comments:false},
+  //client:false
 });
 
 let fpack={
-  db:'Quotes',
-  collect:'Quote350',
+  db:'Company',
+  collect:'Device',
   method:'QUERY',
   options:{
     query:{
@@ -47,24 +48,32 @@ let upack={
 }
 let ipack={
   db:'Company',
-  collect:'Account',
+  collect:'Employee',
   method:'INSERT',
   options:{
-    docs:{
-      empID:'134',
-      type:'VHP',
-      user:'VOGCH',
-      pswrd:'vogel123',
-      active:true,
-      admin:true
-    }
+    docs:{}
   }
 }
 
+let emppath = path.join(__dirname,'./data/empbackup.json');
+let accpath = path.join(__dirname,'./data/accbackup.json')
+let depath = path.join(__dirname,'./data/devbackup.json');
+let suppath = path.join(__dirname,'./data/supbackup.json');
+
+
+let ppath = require(emppath);//accpath;
+
+//for(let x=0;x<ppath.length;x++){
+//  ppath[x]._id = undefined;
+//}
+ipack.options.docs = ppath;
 API.SENDrequest({
-  pack:fpack,
+  pack:ipack,
   route:'STORE'
-}).then(answr=>console.log('ANSWER->',answr))
+}).then(answr=>{
+  console.log('ANSWER->',answr)
+  //fs.writeFileSync(ppath,JSON.stringify(answr.result))
+})
 
 
 
