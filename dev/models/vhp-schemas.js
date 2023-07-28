@@ -1,7 +1,10 @@
 module.exports={
-    ...require('./CompanySchemes.js'),
-    ...require('./SupportSchemes.js'),
-    ...require('./LogSchemas.js'),
-    ...require('./QuoteSchemes.js'),
-    ...require('./JobSchemas.js')
+    Company:require('./CompanySchemes.js'),
+    Support:require('./SupportSchemes.js'),
+    Log:require('./LogSchemas.js'),
+    Replacement:{
+        ...require('./QuoteSchemes.js'),
+        ...require('./JobSchemas.js'),
+        ...require('./ProjectSchemes.js')
+    }
 }

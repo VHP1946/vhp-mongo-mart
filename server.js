@@ -1,7 +1,7 @@
 //Libraries used in project
 const http = require('http');
+const VHPMongoCluster=require('./bin/mongocluster.js');
 
-const VHPMongoClient=require('./bin/mongo');
 module.exports = class VHPMongoMart{
   constructor(config=null){
     if(!config){
@@ -16,10 +16,10 @@ module.exports = class VHPMongoMart{
     if(config){
       this.port = config.PORT;
       this.server = http.createServer();
-      this.mongo = new VHPMongoClient(config.creds,config.schemes);
+      this.mongo = new VHPMongoCluster(config.creds,config.schemes);
       this.server.on('request',(req,res)=>{//handle headers =>
         if(req.rawHeaders['Sec-Fetch-Site']!='same-origin'){
-          if(true){//flag to handle cors, change in config file
+          if(false){//flag to handle cors, change in config file
             res.setHeader('Access-Control-Allow-Origin', '*');
             res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, POST');
             res.setHeader('Access-Control-Max-Age', 2592000); // 30 days
