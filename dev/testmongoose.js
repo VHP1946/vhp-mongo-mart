@@ -42,7 +42,6 @@ async function ViewTest(){  // Once created collections are permantly linked
         console.log('emp >', res[0]);
     })
 }
-
 async function Versioning(){
     Employee.find({empID:'301'}).then((res)=>{
         console.log(res[0]);
@@ -53,7 +52,6 @@ async function Versioning(){
         
     })
 }
-
 // Find Ryan's accounts
 async function main(){
     let temp=[];

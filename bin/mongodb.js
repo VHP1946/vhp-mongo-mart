@@ -45,7 +45,6 @@ module.exports = class VHPMongoDB{
         });
     }
 
-
     QUERYdocs(dbcursor, pack,poplist=[]){
         return new Promise((resolve,reject)=>{
             let request = null;
@@ -53,6 +52,7 @@ module.exports = class VHPMongoDB{
                 if(poplist.length>0){//if there are things to populate, loop through and establish the connection
                     for(let x=0,l=poplist.length;x<l;x++){
                         if(this.schemas[pack.collect].virtuals[poplist[x]]){
+                            
                             this.connection.useDb(pack.db,{useCache:true}).model(this.schemas[pack.collect].virtuals[poplist[x]].options.ref,this.schemas[this.schemas[pack.collect].virtuals[poplist[x]].options.ref]);
                         }
                     }
