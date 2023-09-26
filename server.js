@@ -2,7 +2,14 @@
 const http = require('http');
 const VHPMongoCluster=require('./bin/mongocluster.js');
 
+
+
+
 module.exports = class VHPMongoMart{
+  /**
+   * Something here 
+   * @param {*} config 
+   */
   constructor(config=null){
     if(!config){
       if(process.env.PORT){

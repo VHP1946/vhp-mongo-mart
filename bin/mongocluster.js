@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 const VHPMongoDB=require('./mongodb.js');
 //const schemas = require('../dev/models/vhp-schemas');
+
+
+
+
+
 module.exports = class VHPMongoCluster{
     /**
      * Will attempt to connect to a mongodb server based on the
      * uri passed. You can pass function to afterConnect to run
      * after a connection has been successful.
+     * 
      * 
      * @param {String} uri 
      * @param {Function} afterConnect 
@@ -60,6 +66,7 @@ module.exports = class VHPMongoCluster{
         });
     }
     validPack(pack=null){
+        this.Rou
         if(pack){
             try{
                 if(pack.db && pack.collect && pack.method){return true;}
