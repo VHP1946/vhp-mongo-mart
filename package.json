@@ -1,6 +1,6 @@
 {
   "name": "vhp-mongo-mart",
-  "version": "0.2.0",
+  "version": "0.2.0-dev",
   "description": "Will be the interface to mongoDB through a server",
   "main": "server.js",
   "scripts": {

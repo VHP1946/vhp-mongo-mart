@@ -7,8 +7,8 @@ const VHPMongoCluster=require('./bin/mongocluster.js');
 
 module.exports = class VHPMongoMart{
   /**
-   * Something here 
-   * @param {*} config 
+   * Something here
+   * @param {*} config
    */
   constructor(config=null){
     if(!config){
@@ -36,12 +36,12 @@ module.exports = class VHPMongoMart{
       this.server.on('request',(req,res)=>{
         console.log('Request from mart');
         let data = '';
-      
+
         req.on('data',chunk=>{data+=chunk;});
-      
+
         req.on('end',()=>{
           try{data=JSON.parse(data);}catch{data={};}
-      
+
           let vpak=data;
           console.log('MART PACK',vpak);
           let log = { //prep request log
@@ -51,7 +51,7 @@ module.exports = class VHPMongoMart{
               cip:req.connection.remoteAddress,
             }
           }
-          this.mongo.ROUTErequest(vpak.pack,res).then(result=>{
+          this.mongo.ROUTErequest(vpak,res).then(result=>{
             console.log('END ',result);
             if(!result.success){
               res.write(JSON.stringify(result));
